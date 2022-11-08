@@ -9,7 +9,7 @@ namespace TaskMgmService.Controllers
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        private readonly IRegisterRepository registerRepository = null;
+        private readonly IRegisterRepository registerRepository;
         public RegistrationController(IRegisterRepository registerRepository)
         {
             this.registerRepository = registerRepository;
