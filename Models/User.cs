@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TaskMgmService.Models
 {
-    public partial class Registration
+    public partial class User
     {
         public int UserId { get; set; }
         public string FirstName { get; set; } = null!;
@@ -12,6 +12,7 @@ namespace TaskMgmService.Models
         public string PhoneNo { get; set; } = null!;
         public string Address { get; set; } = null!;
         public int RoleId { get; set; }
+        public string Password { get; set; } = null!;
 
         public virtual RoleType Role { get; set; } = null!;
     }

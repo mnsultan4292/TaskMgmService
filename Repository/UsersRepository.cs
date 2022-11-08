@@ -3,55 +3,55 @@ using TaskMgmService.Models;
 
 namespace TaskMgmService.Repository
 {
-    public class RegisterRepository : IRegisterRepository
+    public class UsersRepository : IUsersRepository
     {
         private readonly TaskMgmDBContext _db;
-        public RegisterRepository(TaskMgmDBContext taskMgmDBContext)
+        public UsersRepository(TaskMgmDBContext taskMgmDBContext)
         {
             _db = taskMgmDBContext;
         }
 
-        public async Task<List<Registration>> GetRegistrations()
+        public async Task<List<User>> GetUsers()
         {
             if (_db != null)
-                return await _db.Registrations.ToListAsync();
+                return await _db.Users.ToListAsync();
             return null;
         }
 
-        public async Task<Registration> GetRegistrationsById(int Id)
+        public async Task<User> GetUsersById(int Id)
         {
             if (_db != null)
-                return await _db.Registrations.FirstOrDefaultAsync(x => x.UserId == Id);
+                return await _db.Users.FirstOrDefaultAsync(x => x.UserId == Id);
             return null;
         }
 
-        public async Task<int> AddRegistration(Registration registration)
+        public async Task<int> AddUser(User user)
         {
             if (_db != null)
             {
-                _db.Registrations.Add(registration);
+                _db.Users.Add(user);
                 return await _db.SaveChangesAsync();
             }
             return 0;
         }
-        public async Task<int> UpdateRegistration(Registration registration)
+        public async Task<int> UpdateUser(User user)
         {
             if (_db != null)
             {
-                _db.Registrations.Update(registration);
+                _db.Users.Update(user);
                 return await _db.SaveChangesAsync();
             }
             return 0;
         }
 
-        public async Task<int> DeleteRegistration(int Id)
+        public async Task<int> DeleteUser(int Id)
         {
             if (_db != null)
             {
-                var data = await _db.Registrations.FirstOrDefaultAsync(x => x.UserId == Id);
+                var data = await _db.Users.FirstOrDefaultAsync(x => x.UserId == Id);
                 if (data != null)
                 {
-                    _db.Registrations.Remove(data);
+                    _db.Users.Remove(data);
                     return await _db.SaveChangesAsync();
                 }
             }

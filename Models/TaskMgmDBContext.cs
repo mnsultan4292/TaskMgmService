@@ -16,9 +16,8 @@ namespace TaskMgmService.Models
         {
         }
 
-        public virtual DbSet<Login> Logins { get; set; } = null!;
-        public virtual DbSet<Registration> Registrations { get; set; } = null!;
         public virtual DbSet<RoleType> RoleTypes { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
@@ -31,32 +30,20 @@ namespace TaskMgmService.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Login>(entity =>
+            modelBuilder.Entity<RoleType>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.RoleId);
 
-                entity.ToTable("Login");
+                entity.ToTable("RoleType");
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UserName)
+                entity.Property(e => e.RoleType1)
                     .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.User)
-                    .WithMany()
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_Login_Registration");
+                    .IsUnicode(false)
+                    .HasColumnName("RoleType");
             });
 
-            modelBuilder.Entity<Registration>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.UserId);
-
-                entity.ToTable("Registration");
-
                 entity.Property(e => e.Address)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -73,26 +60,19 @@ namespace TaskMgmService.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Password)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.PhoneNo)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Registrations)
+                    .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_Registration_RoleType");
-            });
-
-            modelBuilder.Entity<RoleType>(entity =>
-            {
-                entity.HasKey(e => e.RoleId);
-
-                entity.ToTable("RoleType");
-
-                entity.Property(e => e.RoleType1)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("RoleType");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Users_RoleType");
             });
 
             OnModelCreatingPartial(modelBuilder);

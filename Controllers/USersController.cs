@@ -7,21 +7,21 @@ namespace TaskMgmService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegistrationController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private readonly IRegisterRepository registerRepository;
-        public RegistrationController(IRegisterRepository registerRepository)
+        private readonly IUsersRepository usersRepository;
+        public UsersController(IUsersRepository usersRepository)
         {
-            this.registerRepository = registerRepository;
+            this.usersRepository = usersRepository;
         }
 
         [HttpGet]
-        [Route("GetRegistration")]
-        public async Task<IActionResult> GetRegistration()
+        [Route("GetUsers")]
+        public async Task<IActionResult> GetUsers()
         {
             try
             {
-                var data = await registerRepository.GetRegistrations();
+                var data = await usersRepository.GetUsers();
                 if (data != null)
                 {
                     return Ok(data);
@@ -35,12 +35,12 @@ namespace TaskMgmService.Controllers
         }
 
         [HttpGet]
-        [Route("GetRegistrationbyId/{Id}")]
-        public async Task<IActionResult> GetRegistrationsById(int Id)
+        [Route("GetUsersById/{Id}")]
+        public async Task<IActionResult> GetUsersById(int Id)
         {
             try
             {
-                var data = await registerRepository.GetRegistrationsById(Id);
+                var data = await usersRepository.GetUsersById(Id);
                 if (data != null)
                 {
                     return Ok(data);
@@ -54,13 +54,13 @@ namespace TaskMgmService.Controllers
         }
 
         [HttpPost]
-        [Route("PostRegistration")]
-        public async Task<IActionResult> AddRegistration(Registration registration)
+        [Route("PostUser")]
+        public async Task<IActionResult> AddRegistration(User user)
         {
             try
             {
                 int result = 0;
-                result = await registerRepository.AddRegistration(registration);
+                result = await usersRepository.AddUser(user);
 
                 if (result != 0)
                     return Ok(result);
@@ -74,13 +74,13 @@ namespace TaskMgmService.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateRegistration")]
-        public async Task<IActionResult> UpdateRegistration(Registration registration)
+        [Route("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(User user)
         {
             try
             {
                 int result = 0;
-                result = await registerRepository.UpdateRegistration(registration);
+                result = await usersRepository.UpdateUser(user);
 
                 if (result != 0)
                     return Ok(result);
@@ -94,13 +94,13 @@ namespace TaskMgmService.Controllers
         }
 
         [HttpPut]
-        [Route("DeleteRegistration")]
-        public async Task<IActionResult> DeleteRegistration(int Id)
+        [Route("DeleteUser")]
+        public async Task<IActionResult> DeleteUser(int Id)
         {
             try
             {
                 int result = 0;
-                result = await registerRepository.DeleteRegistration(Id);
+                result = await usersRepository.DeleteUser(Id);
 
                 if (result != 0)
                     return Ok(result);

@@ -7,12 +7,12 @@ namespace TaskMgmService.Models
     {
         public RoleType()
         {
-            Registrations = new HashSet<Registration>();
+            Users = new HashSet<User>();
         }
 
         public int RoleId { get; set; }
         public string RoleType1 { get; set; } = null!;
 
-        public virtual ICollection<Registration> Registrations { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

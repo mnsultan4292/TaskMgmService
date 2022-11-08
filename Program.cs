@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 string connectionString = builder.Configuration.GetConnectionString("TaskMgmDbConnection");
 builder.Services.AddDbContext<TaskMgmDBContext>(item => item.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 var app = builder.Build();
 
