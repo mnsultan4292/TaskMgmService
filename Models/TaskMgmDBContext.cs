@@ -44,10 +44,6 @@ namespace TaskMgmService.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Address)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.EmailId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -62,10 +58,6 @@ namespace TaskMgmService.Models
 
                 entity.Property(e => e.Password)
                     .HasMaxLength(150)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PhoneNo)
-                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Role)

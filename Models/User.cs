@@ -9,8 +9,6 @@ namespace TaskMgmService.Models
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string EmailId { get; set; } = null!;
-        public string PhoneNo { get; set; } = null!;
-        public string Address { get; set; } = null!;
         public int RoleId { get; set; }
         public string Password { get; set; } = null!;
 
