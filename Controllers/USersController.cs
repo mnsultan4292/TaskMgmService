@@ -54,7 +54,7 @@ namespace TaskMgmService.Controllers
 
         [HttpPost]
         [Route("PostUser")]
-        public async Task<IActionResult> AddRegistration(User user)
+        public async Task<IActionResult> AddUser(User user)
         {
             try
             {
